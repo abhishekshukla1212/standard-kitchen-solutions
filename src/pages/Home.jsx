@@ -10,6 +10,7 @@ import Stats from "../components/Stats";
 import BeforeAfter from "../components/BeforeAfter";
 import Process from "../components/Process";
 import WhatsAppButton from "../components/WhatsAppButton";
+import WhyChooseUs from "../components/WhyChooseUs";
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
       <Projects />
       <BeforeAfter />
       <About />
+      <WhyChooseUs />
       <Stats />
       <Testimonials />
       <ContactCTA />
