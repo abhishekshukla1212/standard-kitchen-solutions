@@ -9,6 +9,7 @@ import ContactCTA from "../components/ContactCTA";
 import Stats from "../components/Stats";
 import BeforeAfter from "../components/BeforeAfter";
 import Process from "../components/Process";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 function Home() {
   return (
@@ -24,6 +25,7 @@ function Home() {
       <Testimonials />
       <ContactCTA />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
