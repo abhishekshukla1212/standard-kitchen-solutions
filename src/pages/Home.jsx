@@ -11,6 +11,7 @@ import BeforeAfter from "../components/BeforeAfter";
 import Process from "../components/Process";
 import WhatsAppButton from "../components/WhatsAppButton";
 import WhyChooseUs from "../components/WhyChooseUs";
+import Materials from "../components/Materials";
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <Navbar />
       <Hero />
       <Services/>
+      <Materials />
       <Process />
       <Projects />
       <BeforeAfter />
