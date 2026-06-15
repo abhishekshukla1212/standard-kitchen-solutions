@@ -101,7 +101,7 @@ function ContactCTA() {
         </div>
 
         {isFormOpen && (
-          <form id="contact-form" ref={formRef} className="mt-12 space-y-4">
+          <form id="contact-form" ref={formRef} className="mt-12 space-y-4" onSubmit={handleSubmit}>
 
   <input
     id="name"
@@ -141,11 +141,11 @@ function ContactCTA() {
   />
 
   <select name="serviceType" value={formData.serviceType} onChange={handleInputChange} className="w-full p-4 rounded-lg border">
-    <option>Modular Kitchen</option>
-    <option>Wardrobe</option>
-    <option>Office Interior</option>
-    <option>Hotel Interior</option>
-    <option>Hospital Interior</option>
+    <option value="Modular Kitchen">Modular Kitchen</option>
+    <option value="Wardrobe">Wardrobe</option>
+    <option value="Office Interior">Office Interior</option>
+    <option value="Hotel Interior">Hotel Interior</option>
+    <option value="Hospital Interior">Hospital Interior</option>
   </select>
 
   <textarea
@@ -158,8 +158,7 @@ function ContactCTA() {
   ></textarea>
 
   <button
-    type="button"
-    onClick={handleSubmit}
+    type="submit"
     disabled={isSubmitting}
     className="bg-black text-white px-8 py-4 rounded-lg w-full hover:bg-gray-800 disabled:opacity-50"
   >

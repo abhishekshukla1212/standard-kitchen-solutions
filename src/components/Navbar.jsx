@@ -1,21 +1,36 @@
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
+  const services = [
+    "Modular Kitchens",
+    "Wardrobes",
+    "TV Units",
+    "Office Interiors",
+    "Hotel Interiors",
+    "Hospital Interiors",
+    "False Ceiling",
+    "Custom Furniture",
+  ];
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-black/70 backdrop-blur-md text-white z-50">
-
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <h1 className="text-2xl font-bold">
+        <a
+          href="#home"
+          className="text-2xl font-bold tracking-wide"
+        >
           Standard Kitchen
-        </h1>
+        </a>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 text-sm font-medium">
+        <ul className="hidden md:flex gap-8 items-center text-sm font-medium">
 
           <li>
             <a
@@ -35,12 +50,38 @@ function Navbar() {
             </a>
           </li>
 
+          {/* Services Dropdown */}
+          <li
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button className="flex items-center gap-2 hover:text-gray-300 transition">
+              Services
+              <FaChevronDown size={12} />
+            </button>
+
+            {servicesOpen && (
+              <div className="absolute top-full left-0 mt-3 w-64 bg-white text-black rounded-xl shadow-2xl overflow-hidden">
+                {services.map((service, index) => (
+                  <a
+                    key={index}
+                    href="#services"
+                    className="block px-5 py-3 hover:bg-gray-100 transition"
+                  >
+                    {service}
+                  </a>
+                ))}
+              </div>
+            )}
+          </li>
+
           <li>
             <a
-              href="#services"
+              href="#materials"
               className="hover:text-gray-300 transition"
             >
-              Services
+              Materials
             </a>
           </li>
 
@@ -65,9 +106,12 @@ function Navbar() {
         </ul>
 
         {/* Desktop Button */}
-        <button className="hidden md:block bg-white text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition">
+        <a
+          href="#contact"
+          className="hidden md:block bg-white text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition"
+        >
           Get Quote
-        </button>
+        </a>
 
         {/* Mobile Menu Button */}
         <button
@@ -88,7 +132,6 @@ function Navbar() {
             <a
               href="#home"
               onClick={() => setMenuOpen(false)}
-              className="hover:text-gray-300 transition"
             >
               Home
             </a>
@@ -96,23 +139,55 @@ function Navbar() {
             <a
               href="#about"
               onClick={() => setMenuOpen(false)}
-              className="hover:text-gray-300 transition"
             >
               About
             </a>
 
+            {/* Mobile Services */}
+            <div>
+
+              <button
+                className="flex items-center justify-between w-full"
+                onClick={() =>
+                  setMobileServicesOpen(!mobileServicesOpen)
+                }
+              >
+                Services
+                <FaChevronDown
+                  className={`transition ${
+                    mobileServicesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {mobileServicesOpen && (
+                <div className="ml-4 mt-3 flex flex-col gap-3 text-base text-gray-300">
+
+                  {services.map((service, index) => (
+                    <a
+                      key={index}
+                      href="#services"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {service}
+                    </a>
+                  ))}
+
+                </div>
+              )}
+
+            </div>
+
             <a
-              href="#services"
+              href="#materials"
               onClick={() => setMenuOpen(false)}
-              className="hover:text-gray-300 transition"
             >
-              Services
+              Materials
             </a>
 
             <a
               href="#projects"
               onClick={() => setMenuOpen(false)}
-              className="hover:text-gray-300 transition"
             >
               Projects
             </a>
@@ -120,20 +195,21 @@ function Navbar() {
             <a
               href="#contact"
               onClick={() => setMenuOpen(false)}
-              className="hover:text-gray-300 transition"
             >
               Contact
             </a>
 
-            <button className="bg-white text-black px-5 py-3 rounded-lg font-medium w-full hover:bg-gray-200 transition">
+            <a
+              href="#contact"
+              className="bg-white text-black px-5 py-3 rounded-lg font-medium text-center hover:bg-gray-200 transition"
+            >
               Get Quote
-            </button>
+            </a>
 
           </div>
 
         </div>
       )}
-
     </nav>
   );
 }
