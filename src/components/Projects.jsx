@@ -3,6 +3,18 @@ import { FaTimes } from "react-icons/fa";
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const pauseCarousel = () => {
+    const carousel = document.querySelector(".carousel-container");
+    if (carousel) carousel.style.animationPlayState = "paused";
+    setIsCarouselPaused(true);
+  };
+
+  const resumeCarousel = () => {
+    const carousel = document.querySelector(".carousel-container");
+    if (carousel) carousel.style.animationPlayState = "running";
+    setIsCarouselPaused(false);
+  };
 
   const projects = [
     {
@@ -55,17 +67,22 @@ function Projects() {
         </div>
 
         {/* Project Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              onClick={() => setSelectedProject(project)}
-              className="group relative overflow-hidden rounded-3xl cursor-pointer"
-            >
+        <div 
+          className="carousel-wrapper"
+          onTouchStart={pauseCarousel}
+          onTouchEnd={resumeCarousel}
+        >
+          <div className="carousel-container flex gap-8 w-fit">
+            {[...projects, ...projects, ...projects].map((project, index) => (
+              <div
+                key={index}
+                onClick={() => setSelectedProject(project)}
+                className="group relative overflow-hidden rounded-3xl cursor-pointer flex-shrink-0 w-96"
+              >
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-[450px] object-cover group-hover:scale-110 transition duration-500"
+                className="w-full h-80 object-cover group-hover:scale-110 transition duration-500"
               />
 
               <div className="absolute inset-0 bg-black/40"></div>
@@ -76,7 +93,8 @@ function Projects() {
                 </h3>
               </div>
             </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Modal */}
@@ -110,7 +128,7 @@ function Projects() {
                 </p>
 
                 {/* Details */}
-                <div className="grid md:grid-cols-3 gap-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
 
                   <div className="bg-gray-100 p-4 rounded-xl">
                     <h4 className="font-semibold text-black">

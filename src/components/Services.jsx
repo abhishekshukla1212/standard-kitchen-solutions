@@ -67,7 +67,8 @@ function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-gray-100 p-10 rounded-3xl hover:shadow-2xl transition duration-300"
+              style={{ animationDelay: `${index * 0.2}s` }}
+              className="service-card bg-gray-100 p-10 rounded-3xl hover:shadow-2xl transition duration-300"
             >
 
               <div className="text-black mb-6">
