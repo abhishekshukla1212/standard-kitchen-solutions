@@ -5,6 +5,19 @@ import {
   FaHeadset,
 } from "react-icons/fa";
 
+const animationStyles = `
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
 function WhyChooseUs() {
   const features = [
     {
@@ -30,7 +43,9 @@ function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-24 px-6 bg-white">
+    <>
+      <style>{animationStyles}</style>
+      <section className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-16">
@@ -49,6 +64,9 @@ function WhyChooseUs() {
             <div
               key={index}
               className="bg-gray-50 rounded-3xl p-8 text-center shadow-lg hover:-translate-y-2 transition"
+              style={{
+                animation: `slideInUp 0.6s ease-out ${index * 0.15}s both`,
+              }}
             >
               <div className="flex justify-center mb-4 text-black">
                 {item.icon}
@@ -67,7 +85,8 @@ function WhyChooseUs() {
         </div>
 
       </div>
-    </section>
+      </section>
+    </>
   );
 }
 

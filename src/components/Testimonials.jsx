@@ -1,3 +1,27 @@
+const animationStyles = `
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+`;
+
 function Testimonials() {
 
   const testimonials = [
@@ -21,7 +45,9 @@ function Testimonials() {
   ];
 
   return (
-    <section className="bg-gray-100 py-24 px-6">
+    <>
+      <style>{animationStyles}</style>
+      <section className="bg-gray-100 py-24 px-6">
 
       <div className="max-w-7xl mx-auto">
 
@@ -37,12 +63,16 @@ function Testimonials() {
 
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-visible pb-4 snap-x snap-mandatory md:snap-none">
 
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-10 rounded-3xl shadow-lg hover:shadow-2xl transition duration-300"
+              className="bg-white p-10 rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 flex-shrink-0 md:flex-shrink snap-center md:snap-align-none"
+              style={{
+                animation: `slideInUp 0.6s ease-out ${index * 0.15}s both`,
+                minWidth: "calc(100% - 1rem)",
+              }}
             >
 
               <p className="text-gray-600 text-lg leading-relaxed">
@@ -69,6 +99,7 @@ function Testimonials() {
       </div>
 
     </section>
+    </>
   );
 }
 
