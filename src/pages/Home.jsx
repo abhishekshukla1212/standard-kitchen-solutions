@@ -12,6 +12,7 @@ import Process from "../components/Process";
 import WhatsAppButton from "../components/WhatsAppButton";
 import WhyChooseUs from "../components/WhyChooseUs";
 import Materials from "../components/Materials";
+import QuoteCalculator from "../components/QuoteCalculator";
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function Home() {
       <BeforeAfter />
       <About />
       <WhyChooseUs />
+      <QuoteCalculator />
       <Stats />
       <Testimonials />
       <ContactCTA />
