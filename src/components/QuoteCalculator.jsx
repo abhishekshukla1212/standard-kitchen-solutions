@@ -39,14 +39,14 @@ function QuoteCalculator() {
   }, [category, area, materialFactor, extrasCost]);
 
   return (
-    <section id="estimate" className="bg-white py-24 px-6">
-      <div className="mx-auto max-w-6xl rounded-[40px] border border-gray-200 bg-gray-50 p-8 shadow-xl">
+    <section id="estimate" className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl rounded-[40px] border border-gray-200 bg-gray-50 p-6 sm:p-8 shadow-xl">
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-gray-500">
               Instant quote calculator
             </p>
-            <h2 className="mt-4 text-5xl font-bold text-black">
+            <h2 className="mt-4 text-4xl font-bold text-black sm:text-5xl">
               Estimate your kitchen or interior remodel.
             </h2>
             <p className="mt-6 max-w-2xl text-gray-600">
@@ -92,45 +92,45 @@ function QuoteCalculator() {
                 </select>
               </label>
 
-              <div className="grid gap-2 text-sm text-gray-700">
+              <div className="grid gap-3 text-sm text-gray-700">
                 <span>Optional extras</span>
-                <label className="inline-flex items-center gap-3 rounded-3xl border border-gray-300 bg-white px-4 py-3">
+                <label className="flex flex-col gap-3 rounded-3xl border border-gray-300 bg-white p-4 sm:flex-row sm:items-center">
                   <input
                     type="checkbox"
                     checked={extras.plumbing}
                     onChange={(e) => setExtras((prev) => ({ ...prev, plumbing: e.target.checked }))}
                     className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                   />
-                  Plumbing work
+                  <span>Plumbing work</span>
                 </label>
-                <label className="inline-flex items-center gap-3 rounded-3xl border border-gray-300 bg-white px-4 py-3">
+                <label className="flex flex-col gap-3 rounded-3xl border border-gray-300 bg-white p-4 sm:flex-row sm:items-center">
                   <input
                     type="checkbox"
                     checked={extras.lighting}
                     onChange={(e) => setExtras((prev) => ({ ...prev, lighting: e.target.checked }))}
                     className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                   />
-                  Lighting upgrades
+                  <span>Lighting upgrades</span>
                 </label>
-                <label className="inline-flex items-center gap-3 rounded-3xl border border-gray-300 bg-white px-4 py-3">
+                <label className="flex flex-col gap-3 rounded-3xl border border-gray-300 bg-white p-4 sm:flex-row sm:items-center">
                   <input
                     type="checkbox"
                     checked={extras.appliances}
                     onChange={(e) => setExtras((prev) => ({ ...prev, appliances: e.target.checked }))}
                     className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                   />
-                  Appliance package
+                  <span>Appliance package</span>
                 </label>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[32px] border border-black/10 bg-white p-8 shadow-xl">
+          <div className="rounded-[32px] border border-black/10 bg-white p-6 sm:p-8 shadow-xl">
             <div className="text-sm uppercase tracking-[0.35em] text-gray-500">
               Estimated project cost
             </div>
-            <div className="mt-6 flex items-end gap-3">
-              <span className="text-5xl font-bold text-black">${estimate.toLocaleString()}</span>
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <span className="text-4xl font-bold text-black sm:text-5xl">${estimate.toLocaleString()}</span>
               <span className="text-gray-500">approx.</span>
             </div>
             <p className="mt-3 text-sm text-gray-600">
