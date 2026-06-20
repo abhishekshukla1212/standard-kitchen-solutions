@@ -22,11 +22,11 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
-        <a
-          href="#home"
-          className="text-2xl font-bold tracking-wide"
-        >
-          Standard Kitchen
+        <a href="#home" className="flex items-center gap-3">
+          <img src="/logo.png" alt="Standard Kitchen" className="h-10 w-auto" />
+          <span className="text-2xl font-bold tracking-wide">
+            Standard Kitchen
+          </span>
         </a>
 
         {/* Desktop Menu */}
