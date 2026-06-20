@@ -58,12 +58,12 @@ function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="flex md:grid md:grid-cols-4 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none py-4">
 
           {features.map((item, index) => (
             <div
               key={index}
-              className="bg-gray-50 rounded-3xl p-8 text-center shadow-lg hover:-translate-y-2 transition"
+              className="bg-gray-50 rounded-3xl p-8 text-center shadow-lg hover:-translate-y-2 transition flex-shrink-0 w-[85%] sm:w-[70%] md:w-auto snap-center"
               style={{
                 animation: `slideInUp 0.6s ease-out ${index * 0.15}s both`,
               }}
