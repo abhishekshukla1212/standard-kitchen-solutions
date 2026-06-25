@@ -23,7 +23,7 @@ function Navbar() {
 
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3">
-          <img src="/logo.png" alt="Standard Kitchen" className="h-10 w-auto" />
+          <img src="/logo.jpeg" alt="Standard Kitchen" className="h-14 w-auto" />
           <span className="text-2xl font-bold tracking-wide">
             Standard Kitchen
           </span>
