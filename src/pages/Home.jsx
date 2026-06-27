@@ -14,10 +14,10 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import Materials from "../components/Materials";
 import QuoteCalculator from "../components/QuoteCalculator";
 
-function Home() {
+function Home({ onOpenInvoice }) {
   return (
     <>
-      <Navbar />
+      <Navbar onInvoiceClick={onOpenInvoice} />
       <Hero />
       <Services/>
       <Materials />

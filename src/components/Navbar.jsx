@@ -1,20 +1,17 @@
 import { useState } from "react";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({ onInvoiceClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   const services = [
-    "Modular Kitchens",
-    "Wardrobes",
-    "TV Units",
-    "Office Interiors",
-    "Hotel Interiors",
-    "Hospital Interiors",
-    "False Ceiling",
-    "Custom Furniture",
+    "Gas Hob Repair",
+    "Gas Stove Repair",
+    "Gas Cooktop Repair",
+    "Chimney Repair",
+    "Microwave Oven Repair",
   ];
 
   return (
@@ -105,13 +102,21 @@ function Navbar() {
 
         </ul>
 
-        {/* Desktop Button */}
-        <a
-          href="#contact"
-          className="hidden md:block bg-white text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition"
-        >
-          Get Quote
-        </a>
+        {/* Desktop Buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={onInvoiceClick}
+            className="bg-teal-500 text-white px-5 py-2 rounded-lg font-medium hover:bg-teal-400 transition"
+          >
+            Invoice
+          </button>
+          <a
+            href="#contact"
+            className="bg-white text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition"
+          >
+            Get Quote
+          </a>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -198,6 +203,16 @@ function Navbar() {
             >
               Contact
             </a>
+
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                if (onInvoiceClick) onInvoiceClick();
+              }}
+              className="bg-teal-500 text-white px-5 py-3 rounded-lg font-medium text-center hover:bg-teal-400 transition"
+            >
+              Invoice
+            </button>
 
             <a
               href="#contact"
