@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import companyLogo from "../assets/hero.png";
+const companyLogo = "/logo.jpeg";
 
 const companyInfo = {
   companyName: "Vivek Kitchen Studio",
@@ -352,8 +352,8 @@ function Invoice({ onBack }) {
         }
 
         .brand-logo {
-          width: 72px;
-          height: 72px;
+          width: 120px;
+          height: 120px;
           object-fit: cover;
           border-radius: 16px;
           border: 1px solid #e2e8f0;
