@@ -3,18 +3,7 @@ import { FaTimes } from "react-icons/fa";
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
-  const pauseCarousel = () => {
-    const carousel = document.querySelector(".carousel-container");
-    if (carousel) carousel.style.animationPlayState = "paused";
-    setIsCarouselPaused(true);
-  };
-
-  const resumeCarousel = () => {
-    const carousel = document.querySelector(".carousel-container");
-    if (carousel) carousel.style.animationPlayState = "running";
-    setIsCarouselPaused(false);
-  };
+  const [isPaused, setIsPaused] = useState(false);
 
   const projects = [
     {
@@ -28,7 +17,6 @@ function Projects() {
       description:
         "Modern modular kitchen with premium acrylic finish and soft-close cabinets.",
     },
-
     {
       id: 2,
       image:
@@ -40,7 +28,6 @@ function Projects() {
       description:
         "Elegant interior solution with customized storage and lighting.",
     },
-
     {
       id: 3,
       image:
@@ -54,45 +41,65 @@ function Projects() {
     },
   ];
 
+  // Duplicating the list ensures seamless looping from 0% to -50%
+  const marqueeItems = [...projects, ...projects];
+
   return (
-    <section id="projects" className="bg-black text-white py-24 px-6">
+    <section id="projects" className="bg-black text-white py-24 px-6 overflow-hidden">
+      {/* Dynamic Keyframes for smooth infinite loop */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
+        }
+        .paused {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold">Our Projects</h2>
-
           <p className="mt-4 text-gray-400 text-lg">
             Explore our premium kitchen and interior transformations.
           </p>
         </div>
 
-        {/* Project Cards */}
-        <div 
-          className="carousel-wrapper"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarousel}
+        {/* Continuous Marquee Track */}
+        <div
+          className="relative w-full overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
         >
-          <div className="carousel-container flex gap-8 w-fit">
-            {[...projects, ...projects, ...projects].map((project, index) => (
+          <div
+            className={`flex gap-8 w-max ${
+              isPaused ? "paused" : ""
+            } animate-marquee`}
+          >
+            {marqueeItems.map((project, index) => (
               <div
-                key={index}
+                key={`${project.id}-${index}`}
                 onClick={() => setSelectedProject(project)}
                 className="group relative overflow-hidden rounded-3xl cursor-pointer flex-shrink-0 w-96"
               >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-80 object-cover group-hover:scale-110 transition duration-500"
-              />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-80 object-cover group-hover:scale-110 transition duration-500"
+                />
 
-              <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 bg-black/40"></div>
 
-              <div className="absolute bottom-6 left-6">
-                <h3 className="text-2xl font-semibold">
-                  {project.title}
-                </h3>
+                <div className="absolute bottom-6 left-6">
+                  <h3 className="text-2xl font-semibold">{project.title}</h3>
+                </div>
               </div>
-            </div>
             ))}
           </div>
         </div>
@@ -101,7 +108,6 @@ function Projects() {
         {selectedProject && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6">
             <div className="relative bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl">
-
               {/* Close Icon */}
               <button
                 onClick={() => setSelectedProject(null)}
@@ -129,42 +135,24 @@ function Projects() {
 
                 {/* Details */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-
                   <div className="bg-gray-100 p-4 rounded-xl">
-                    <h4 className="font-semibold text-black">
-                      Area
-                    </h4>
-
-                    <p className="text-gray-600">
-                      {selectedProject.area}
-                    </p>
+                    <h4 className="font-semibold text-black">Area</h4>
+                    <p className="text-gray-600">{selectedProject.area}</p>
                   </div>
 
                   <div className="bg-gray-100 p-4 rounded-xl">
-                    <h4 className="font-semibold text-black">
-                      Material
-                    </h4>
-
-                    <p className="text-gray-600">
-                      {selectedProject.material}
-                    </p>
+                    <h4 className="font-semibold text-black">Material</h4>
+                    <p className="text-gray-600">{selectedProject.material}</p>
                   </div>
 
                   <div className="bg-gray-100 p-4 rounded-xl">
-                    <h4 className="font-semibold text-black">
-                      Duration
-                    </h4>
-
-                    <p className="text-gray-600">
-                      {selectedProject.duration}
-                    </p>
+                    <h4 className="font-semibold text-black">Duration</h4>
+                    <p className="text-gray-600">{selectedProject.duration}</p>
                   </div>
-
                 </div>
 
                 {/* Buttons */}
                 <div className="flex gap-4 mt-8">
-
                   <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
                     Request Quote
                   </button>
@@ -175,11 +163,8 @@ function Projects() {
                   >
                     Close
                   </button>
-
                 </div>
-
               </div>
-
             </div>
           </div>
         )}
