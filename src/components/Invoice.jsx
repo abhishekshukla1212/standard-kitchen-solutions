@@ -3,9 +3,9 @@ const companyLogo = "/logo.jpeg";
 
 const companyInfo = {
   companyName: "Vivek Kitchen Studio",
-  address: "12, Garden Lane, Jaipur, Rajasthan",
-  phone: "+91 98765 43210",
-  email: "vivek@kitchenstudio.com",
+  address: "office no 30, Nityapriya buiding, nityanand nagar, station road, andheri east ,mumbai ,maharashtra 400069",
+  phone: "+91 93263 89896",
+  email: "standardkitchensoution@gmail.com",
   gst: "08ABCDE1234F1Z5",
 };
 

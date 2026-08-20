@@ -26,7 +26,7 @@ function Projects() {
       material: "Laminate Finish",
       duration: "21 Days",
       description:
-        "Elegant interior solution with customized storage and lighting.",
+        "Elegant  interior solution with customized storage and lighting.",
     },
     {
       id: 3,
