@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 const companyLogo = "/logo.jpeg";
 
 const companyInfo = {
-  companyName: "Vivek Kitchen Studio",
-  address: "office no 30, Nityapriya buiding, nityanand nagar, station road, andheri east ,mumbai ,maharashtra 400069",
+  companyName: "STANDARD KITCHEN SOLUTIONS",
+  address: "office no 30, Nityapriya building, nityanand nagar, station road, andheri east ,mumbai ,maharashtra 400069",
   phone: "+91 93263 89896",
   email: "standardkitchensoution@gmail.com",
   gst: "08ABCDE1234F1Z5",
@@ -630,7 +630,7 @@ function Invoice({ onBack }) {
 
               <div className="invoice-meta">
                 <div className="meta-card">
-                  <h3>Billed To</h3>
+                  <h3>Bill To</h3>
                   <p>{activeInvoice.customerName}</p>
                   <p>{activeInvoice.customerAddress}</p>
                   <p>Phone: {activeInvoice.customerMobile}</p>
