@@ -633,13 +633,6 @@ function Invoice({ onBack }) {
                   <h3>Bill To</h3>
                   <p>{activeInvoice.customerName}</p>
                   <p>{activeInvoice.customerAddress}</p>
-                  <p>Phone: {activeInvoice.customerMobile}</p>
-                </div>
-
-                <div className="meta-card">
-                  <h3>Project Details</h3>
-                  <p>Kitchen project / service billing</p>
-                  <p>Payment Terms: Due on receipt</p>
                 </div>
               </div>
 
