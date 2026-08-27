@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function About() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section id="about" className="bg-white py-24 px-6">
 
@@ -34,9 +38,44 @@ function About() {
             practical environments tailored to modern lifestyles.
           </p>
 
-          <button className="mt-8 bg-black text-white px-7 py-4 rounded-xl font-semibold hover:bg-gray-800 transition">
-            Learn More
+          <button
+            type="button"
+            onClick={() => setIsExpanded((expanded) => !expanded)}
+            aria-expanded={isExpanded}
+            className="mt-8 bg-black text-white px-7 py-4 rounded-xl font-semibold hover:bg-gray-800 transition"
+          >
+            {isExpanded ? "Show Less" : "Learn More"}
           </button>
+
+          {isExpanded && (
+            <div className="mt-8 border-t border-gray-200 pt-8 space-y-6">
+              <div>
+                <h3 className="text-xl font-semibold text-black">Designed Around You</h3>
+                <p className="mt-2 text-gray-600 leading-relaxed">
+                  Every project begins with your routine, taste, and available space. We create a practical layout first, then refine it with finishes that feel personal.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold text-black">Thoughtful Planning</h3>
+                  <p className="mt-2 text-gray-600 leading-relaxed">
+                    From storage and lighting to work zones and appliances, every detail is planned for everyday comfort.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-black">Built To Last</h3>
+                  <p className="mt-2 text-gray-600 leading-relaxed">
+                    We select durable materials, reliable hardware, and quality finishes that keep your kitchen beautiful for years.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-gray-600 leading-relaxed">
+                Our team manages the process from the first consultation through installation, keeping communication clear and the final result true to your vision.
+              </p>
+            </div>
+          )}
 
         </div>
         

@@ -6,7 +6,7 @@ const companyInfo = {
   address: "office no 30, Nityapriya building, nityanand nagar, station road, andheri east ,mumbai ,maharashtra 400069",
   phone: "+91 93263 89896",
   email: "standardkitchensoution@gmail.com",
-  gst: "08ABCDE1234F1Z5",
+  //gst: "08ABCDE1234F1Z5",
 };
 
 const adminCredentials = {
@@ -616,7 +616,7 @@ function Invoice({ onBack }) {
                     <p>{companyInfo.address}</p>
                     <p>Phone: {companyInfo.phone}</p>
                     <p>Email: {companyInfo.email}</p>
-                    <p>GST: {companyInfo.gst}</p>
+                    {/* <p>GST: {companyInfo.gst}</p> */}
                   </div>
                 </div>
 
