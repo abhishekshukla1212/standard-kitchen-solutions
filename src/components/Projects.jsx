@@ -45,7 +45,7 @@ function Projects() {
   const marqueeItems = [...projects, ...projects];
 
   return (
-    <section id="projects" className="bg-black text-white py-24 px-6 overflow-hidden">
+    <section id="projects" className="bg-black text-white py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
       {/* Dynamic Keyframes for smooth infinite loop */}
       <style>{`
         @keyframes marquee {
@@ -62,9 +62,9 @@ function Projects() {
 
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold">Our Projects</h2>
-          <p className="mt-4 text-gray-400 text-lg">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-3xl sm:text-5xl font-bold">Our Projects</h2>
+          <p className="mt-4 text-gray-400 text-base sm:text-lg">
             Explore our premium kitchen and interior transformations.
           </p>
         </div>
@@ -86,7 +86,7 @@ function Projects() {
               <div
                 key={`${project.id}-${index}`}
                 onClick={() => setSelectedProject(project)}
-                className="group relative overflow-hidden rounded-3xl cursor-pointer flex-shrink-0 w-96"
+                className="group relative overflow-hidden rounded-3xl cursor-pointer flex-shrink-0 w-[calc(100vw-2rem)] sm:w-96"
               >
                 <img
                   src={project.image}
@@ -107,7 +107,7 @@ function Projects() {
         {/* Modal */}
         {selectedProject && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6">
-            <div className="relative bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl">
+            <div className="relative bg-white rounded-3xl max-w-3xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto shadow-2xl">
               {/* Close Icon */}
               <button
                 onClick={() => setSelectedProject(null)}
@@ -120,12 +120,12 @@ function Projects() {
               <img
                 src={selectedProject.image}
                 alt={selectedProject.title}
-                className="w-full h-80 object-cover"
+                className="w-full h-48 sm:h-80 object-cover"
               />
 
               {/* Content */}
-              <div className="p-8">
-                <h2 className="text-4xl font-bold text-black mb-4">
+              <div className="p-5 sm:p-8">
+                <h2 className="text-2xl sm:text-4xl font-bold text-black mb-4">
                   {selectedProject.title}
                 </h2>
 
@@ -152,14 +152,14 @@ function Projects() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-4 mt-8">
-                  <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+                <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                  <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition w-full sm:w-auto">
                     Request Quote
                   </button>
 
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="border border-black text-black px-6 py-3 rounded-lg hover:bg-gray-100 transition"
+                    className="border border-black text-black px-6 py-3 rounded-lg hover:bg-gray-100 transition w-full sm:w-auto"
                   >
                     Close
                   </button>
