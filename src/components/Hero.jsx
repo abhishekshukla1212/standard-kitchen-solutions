@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 
 function Hero() {
   const images = [
-    "https://www.standardkitchensolutions.com/img/carousel-1.jpg",
-    "https://www.standardkitchensolutions.com/img/carousel-2.jpg",
-    "https://www.standardkitchensolutions.com/img/carousel-3.jpg",
+    "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1600",
+    "https://images.unsplash.com/photo-1565538420870-da08ff96a207?w=1600",
+    "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1600",
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
