@@ -14,7 +14,7 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import Materials from "../components/Materials";
 //import QuoteCalculator from "../components/QuoteCalculator";//
 
-function Home({ onOpenInvoice }) {
+function Home({ onOpenInvoice, onOpenAbout }) {
   return (
     <>
       <Navbar onInvoiceClick={onOpenInvoice} />
@@ -24,12 +24,12 @@ function Home({ onOpenInvoice }) {
       <Process />
       <Projects />
       <BeforeAfter />
-      <About />
+      <About onLearnMore={onOpenAbout} />
       <WhyChooseUs />
       <Stats />
       <Testimonials />
       <ContactCTA />
-      <Footer />
+      <Footer onOpenAbout={onOpenAbout} />
       <WhatsAppButton />
     </>
   );

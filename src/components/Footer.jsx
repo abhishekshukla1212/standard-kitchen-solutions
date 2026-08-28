@@ -1,6 +1,6 @@
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
-function Footer() {
+function Footer({ onOpenAbout }) {
   return (
     <footer className="bg-gray-950 text-white py-16 px-6">
 
@@ -10,7 +10,7 @@ function Footer() {
         <div>
 
           <h2 className="text-3xl font-bold">
-            Standard Kitchen Solurtions
+            Standard Kitchen Solutions
           </h2>
 
           <p className="mt-4 text-gray-400 leading-relaxed">
@@ -33,7 +33,9 @@ function Footer() {
             </li>
 
             <li className="hover:text-white cursor-pointer">
-              <a href="#about">About</a>
+              <button type="button" onClick={onOpenAbout}>
+                About
+              </button>
             </li>
 
             <li className="hover:text-white cursor-pointer">
