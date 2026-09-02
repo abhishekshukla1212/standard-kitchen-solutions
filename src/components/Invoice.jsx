@@ -667,10 +667,12 @@ function Invoice({ onBack }) {
                     <span>Tax ({activeInvoice.tax || 0}%)</span>
                     <span>{currency.format(activeInvoice.taxAmount || 0)}</span>
                   </div>
-                  <div className="totals-row">
-                    <span>Discount ({activeInvoice.discount || 0}%)</span>
-                    <span>{currency.format(activeInvoice.discountAmount || 0)}</span>
-                  </div>
+                  {activeInvoice.discount > 0 && (
+                    <div className="totals-row">
+                      <span>Discount ({activeInvoice.discount}%)</span>
+                      <span>{currency.format(activeInvoice.discountAmount || 0)}</span>
+                    </div>
+                  )}
                   <div className="totals-row">
                     <strong>Total</strong>
                     <strong>{currency.format(activeInvoice.total || 0)}</strong>

@@ -15,7 +15,7 @@ function Navbar({ onInvoiceClick }) {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black/70 backdrop-blur-md text-white z-50">
+    <nav className="fixed top-0 left-0 right-0 w-full bg-black/70 backdrop-blur-md text-white z-100">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}
