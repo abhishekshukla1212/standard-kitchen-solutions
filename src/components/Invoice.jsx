@@ -5,7 +5,7 @@ const companyInfo = {
   companyName: "STANDARD KITCHEN SOLUTIONS",
   address: "office no 30, Nityapriya building, nityanand nagar, station road, andheri east ,mumbai ,maharashtra 400069",
   phone: "+91 93263 89896",
-  email: "standardkitchensoution@gmail.com",
+  email: "standardkitchensolution@gmail.com",
   //gst: "08ABCDE1234F1Z5",
 };
 
@@ -606,7 +606,7 @@ function Invoice({ onBack }) {
           </div>
 
           <div className="invoice-preview">
-            <h2>Invoice Preview</h2>
+            <h2>Invoice </h2>
             <div className="invoice-card">
               <div className="invoice-header">
                 <div className="brand-block">
