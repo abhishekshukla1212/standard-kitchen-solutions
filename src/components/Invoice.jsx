@@ -195,11 +195,37 @@ function Invoice({ onBack }) {
     <div className="invoice-page">
       <style>{`
         .invoice-page {
+          --ink: #29231f;
+          --muted: #766b61;
+          --walnut: #3a2920;
+          --walnut-deep: #251914;
+          --brass: #b7833d;
+          --cream: #f7f1e8;
+          --paper: #fffdfa;
           min-height: 100vh;
-          padding: 24px;
-          background: #f5f7fb;
-          font-family: Inter, Arial, sans-serif;
-          color: #1f2937;
+          padding: 34px clamp(18px, 4vw, 64px) 64px;
+          background: radial-gradient(circle at 8% 0%, rgba(183, 131, 61, 0.17), transparent 28%), linear-gradient(135deg, #efe7da 0%, #f8f5ef 48%, #e8dfd2 100%);
+          color: var(--ink);
+          font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        }
+
+        .invoice-page::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.28;
+          background-image: repeating-linear-gradient(115deg, transparent 0 8px, rgba(58, 41, 32, 0.035) 9px 10px);
+        }
+
+        .invoice-header-row,
+        .invoice-body,
+        .login-card {
+          position: relative;
+          z-index: 1;
+          max-width: 1440px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .invoice-header-row {
@@ -207,273 +233,122 @@ function Invoice({ onBack }) {
           justify-content: space-between;
           align-items: center;
           gap: 20px;
-          margin-bottom: 24px;
+          margin-bottom: 28px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid rgba(58, 41, 32, 0.2);
           flex-wrap: wrap;
+        }
+
+        .invoice-header-row::after {
+          content: "STANDARD KITCHEN SOLUTIONS  /  ADMIN STUDIO";
+          color: var(--walnut);
+          font: 700 11px/1.2 Georgia, serif;
+          letter-spacing: 0.18em;
+          order: -1;
         }
 
         .back-button,
         .print-btn,
         .secondary-btn,
         .ghost-btn {
-          border: none;
+          border: 1px solid transparent;
           cursor: pointer;
-          border-radius: 999px;
-          font-weight: 600;
+          border-radius: 6px;
+          font: 700 12px/1 "Trebuchet MS", sans-serif;
+          letter-spacing: 0.04em;
+          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
         }
 
-        .back-button {
-          background: #111827;
-          color: white;
-          padding: 12px 20px;
-        }
+        .back-button:hover,
+        .print-btn:hover,
+        .secondary-btn:hover,
+        .ghost-btn:hover { transform: translateY(-2px); }
 
-        .print-btn {
-          background: #0f766e;
-          color: white;
-          padding: 12px 20px;
-        }
-
-        .ghost-btn {
-          background: #f3f4f6;
-          color: #111827;
-          padding: 10px 16px;
-        }
+        .back-button { background: var(--walnut-deep); color: #fffaf2; padding: 13px 18px; box-shadow: 0 8px 18px rgba(37, 25, 20, 0.16); }
+        .print-btn { background: var(--brass); color: #fffdf8; padding: 13px 18px; box-shadow: 0 8px 18px rgba(139, 91, 32, 0.2); }
+        .ghost-btn { background: rgba(255, 253, 250, 0.7); color: var(--walnut); border-color: rgba(58, 41, 32, 0.18); padding: 11px 16px; }
 
         .login-card,
         .invoice-form,
         .invoice-preview {
-          background: white;
-          border-radius: 24px;
-          padding: 24px;
-          box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+          background: rgba(255, 253, 250, 0.94);
+          border: 1px solid rgba(58, 41, 32, 0.14);
+          border-radius: 10px;
+          padding: clamp(22px, 3vw, 34px);
+          box-shadow: 0 20px 50px rgba(58, 41, 32, 0.12);
         }
 
-        .login-card {
-          max-width: 560px;
-          margin: 36px auto;
-        }
-
+        .login-card { max-width: 560px; margin-top: 56px; }
         .login-card h2,
         .invoice-form h2,
-        .invoice-preview h2 {
-          margin-top: 0;
-          font-size: 22px;
-          color: #0f172a;
-        }
+        .invoice-preview > h2 { margin: 0 0 8px; font: 700 27px/1.15 Georgia, serif; color: var(--walnut-deep); }
+        .login-card p,
+        .invoice-form > p { color: var(--muted); margin: 0 0 24px; line-height: 1.6; }
 
-        .invoice-body {
-          display: grid;
-          grid-template-columns: 1fr 1.1fr;
-          gap: 24px;
-        }
-
-        .form-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 16px;
-        }
-
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-
+        .invoice-body { display: grid; grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1.12fr); gap: 26px; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+        .form-group { display: flex; flex-direction: column; gap: 7px; }
+        .form-group label { color: var(--walnut); font: 700 11px/1.2 "Trebuchet MS", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
         .form-group input,
-        .form-group textarea {
-          border: 1px solid #cbd5e1;
-          border-radius: 12px;
-          padding: 12px 14px;
-          font-size: 14px;
-          color: #0f172a;
-          background: #f8fafc;
-        }
+        .form-group textarea,
+        .items-table input { border: 1px solid #d8cbbb; border-radius: 5px; padding: 12px 13px; font: 14px "Trebuchet MS", sans-serif; color: var(--ink); background: #fcf8f1; outline: none; }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .items-table input:focus { border-color: var(--brass); box-shadow: 0 0 0 3px rgba(183, 131, 61, 0.14); }
+        .form-group textarea { min-height: 96px; resize: vertical; }
 
-        .form-group textarea {
-          min-height: 96px;
-          resize: vertical;
-        }
-
-        .items-table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-top: 16px;
-        }
-
+        .items-table-container { overflow-x: auto; }
+        .items-table-container h3 { color: var(--walnut); font: 700 18px Georgia, serif; }
+        .items-table { width: 100%; border-collapse: collapse; margin-top: 16px; min-width: 440px; }
         .items-table th,
-        .items-table td {
-          border-bottom: 1px solid #e2e8f0;
-          padding: 12px 10px;
-          text-align: left;
-        }
+        .items-table td { border-bottom: 1px solid #e4d9cc; padding: 12px 9px; text-align: left; }
+        .items-table th { color: #806b58; background: #f3eadf; font: 700 11px "Trebuchet MS", sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+        .items-table input { width: 100%; box-sizing: border-box; padding: 9px 10px; }
+        .item-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+        .secondary-btn { padding: 10px 14px; color: var(--walnut); background: #eadfD1; }
 
-        .items-table th {
-          color: #475569;
-          background: #f8fafc;
-        }
+        .invoice-preview { display: flex; flex-direction: column; gap: 18px; }
+        .invoice-card { border: 1px solid #d8cbbb; border-radius: 5px; padding: clamp(20px, 3vw, 34px); background: var(--paper); box-shadow: 0 12px 30px rgba(58, 41, 32, 0.08); }
+        .invoice-card .invoice-header { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 3px solid var(--brass); }
+        .brand-block { display: flex; align-items: flex-start; gap: 16px; max-width: 620px; }
+        .brand-logo { width: 94px; height: 94px; object-fit: cover; border-radius: 4px; border: 5px solid #f0e3d0; background: #f8efe3; padding: 4px; }
+        .brand-block h1 { margin: 0 0 9px; font: 700 25px/1.1 Georgia, serif; color: var(--walnut-deep); }
+        .brand-block p, .meta-card p, .notes-box p { margin: 4px 0; color: var(--muted); line-height: 1.55; font-size: 13px; }
+        .invoice-title { text-align: right; }
+        .invoice-title h2 { margin: 0 0 12px; font: 700 26px Georgia, serif; color: var(--brass); }
+        .invoice-title p { margin: 5px 0; color: var(--muted); font-size: 13px; }
+        .invoice-meta { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 18px; }
+        .meta-card { background: var(--cream); padding: 16px; border-left: 4px solid var(--brass); border-radius: 2px; }
+        .meta-card h3, .notes-box h3 { margin: 0 0 8px; color: var(--walnut); font: 700 13px "Trebuchet MS", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+        .totals { display: flex; justify-content: flex-end; }
+        .totals-box { min-width: 270px; background: var(--walnut); color: #fffaf2; border-radius: 3px; padding: 17px 20px; }
+        .totals-row { display: flex; justify-content: space-between; gap: 30px; margin: 9px 0; font-size: 13px; }
+        .totals-row:last-child { border-top: 1px solid rgba(255, 250, 242, 0.3); padding-top: 13px; margin-top: 14px; font-size: 16px; }
+        .notes-box { border-top: 1px solid #e4d9cc; padding-top: 16px; }
+        .invoice-list { display: flex; flex-direction: column; gap: 10px; }
+        .invoice-list h3 { margin: 0 0 3px; color: var(--walnut); font: 700 18px Georgia, serif; }
+        .invoice-list-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid #d8cbbb; border-radius: 5px; padding: 13px 15px; background: rgba(255, 253, 250, 0.68); }
+        .invoice-list-item strong { display: block; margin-bottom: 4px; color: var(--walnut-deep); }
+        .error-text { color: #a33e2c; margin-top: 10px; font-size: 13px; }
 
-        .item-controls {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-          margin-top: 14px;
-        }
-
-        .secondary-btn {
-          padding: 10px 16px;
-          color: #0f172a;
-          background: #e2e8f0;
-        }
-
-        .invoice-preview {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .invoice-card {
-          border-radius: 18px;
-          border: 1px solid #e2e8f0;
-          padding: 26px;
-        }
-
-        .invoice-card .invoice-header {
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-          flex-wrap: wrap;
-          margin-bottom: 24px;
-        }
-
-        .brand-block {
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-        }
-
-        .brand-logo {
-          width: 120px;
-          height: 120px;
-          object-fit: cover;
-          border-radius: 16px;
-          border: 1px solid #e2e8f0;
-          background: #f8fafc;
-          padding: 6px;
-        }
-
-        .brand-block h1 {
-          margin: 0 0 10px;
-          font-size: 26px;
-          color: #0f172a;
-        }
-
-        .brand-block p,
-        .meta-card p,
-        .notes-box p {
-          margin: 4px 0;
-          color: #475569;
-          line-height: 1.6;
-        }
-
-        .invoice-title h2 {
-          margin: 0 0 10px;
-          font-size: 24px;
-          color: #0f766e;
-        }
-
-        .invoice-meta {
-          display: grid;
-          grid-template-columns: 1.2fr 0.8fr;
-          gap: 18px;
-          margin-bottom: 20px;
-        }
-
-        .meta-card {
-          background: #f8fafc;
-          padding: 16px;
-          border-radius: 14px;
-        }
-
-        .totals {
-          display: flex;
-          justify-content: flex-end;
-        }
-
-        .totals-box {
-          min-width: 260px;
-          background: #f8fafc;
-          border-radius: 12px;
-          padding: 18px;
-        }
-
-        .totals-row {
-          display: flex;
-          justify-content: space-between;
-          margin: 10px 0;
-        }
-
-        .notes-box {
-          border-top: 1px solid #e2e8f0;
-          padding-top: 16px;
-        }
-
-        .invoice-list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .invoice-list-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 12px;
-          border: 1px solid #e2e8f0;
-          border-radius: 14px;
-          padding: 12px 14px;
-          background: #f8fafc;
-        }
-
-        .invoice-list-item strong {
-          display: block;
-          margin-bottom: 4px;
-        }
-
-        .error-text {
-          color: #b91c1c;
-          margin-top: 8px;
-          font-size: 14px;
-        }
-
-        @media (max-width: 1024px) {
-          .invoice-body {
-            grid-template-columns: 1fr;
-          }
+        @media (max-width: 1024px) { .invoice-body { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) {
+          .invoice-page { padding: 22px 14px 42px; }
+          .invoice-header-row::after { width: 100%; }
+          .form-grid { grid-template-columns: 1fr; }
+          .brand-block { flex-direction: column; }
+          .invoice-title { text-align: left; }
+          .invoice-card { padding: 18px 14px; }
+          .totals-box { min-width: 0; width: 100%; box-sizing: border-box; }
         }
 
         @media print {
-          body {
-            background: white;
-          }
-
-          .invoice-page {
-            padding: 0;
-            background: white;
-          }
-
-          .invoice-header-row,
-          .invoice-form,
-          .secondary-btn,
-          .ghost-btn,
-          .invoice-list {
-            display: none;
-          }
-
-          .invoice-card {
-            border: none;
-            box-shadow: none;
-            padding: 0;
-          }
+          body { background: white; }
+          .invoice-page { padding: 0; background: white; }
+          .invoice-page::before, .invoice-header-row, .invoice-form, .secondary-btn, .ghost-btn, .invoice-list { display: none; }
+          .invoice-preview { display: block; padding: 0; border: none; box-shadow: none; }
+          .invoice-preview > h2 { display: none; }
+          .invoice-card { border: none; box-shadow: none; padding: 0; }
         }
       `}</style>
 
