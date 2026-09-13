@@ -104,12 +104,7 @@ function Navbar({ onInvoiceClick }) {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={onInvoiceClick}
-            className="bg-teal-500 text-white px-5 py-2 rounded-lg font-medium hover:bg-teal-400 transition"
-          >
-            Invoice
-          </button>
+          
           <a
             href="#contact"
             className="bg-white text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition"
@@ -204,15 +199,6 @@ function Navbar({ onInvoiceClick }) {
               Contact
             </a>
 
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                if (onInvoiceClick) onInvoiceClick();
-              }}
-              className="bg-teal-500 text-white px-5 py-3 rounded-lg font-medium text-center hover:bg-teal-400 transition"
-            >
-              Invoice
-            </button>
 
             <a
               href="#contact"
