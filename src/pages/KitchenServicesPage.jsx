@@ -1,7 +1,6 @@
 import { FaFire, FaWrench, FaShieldAlt, FaClock, FaCheckCircle } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Footer from "../components/Footer";
 
 function KitchenServicesPage({ onBack, onOpenAbout, onOpenContact, onOpenCarpentry }) {
   const gasServices = [
