@@ -71,7 +71,7 @@ function ContactPage({ onBack, onOpenAbout, onOpenKitchen, onOpenCarpentry }) {
       />
 
       {/* Hero Header */}
-      <section className="relative h-screen w-full overflow-hidden bg-darktext flex flex-col justify-center px-6 text-center">
+      <section className="relative h-screen w-full overflow-hidden bg-darktext flex flex-col justify-center px-6 md:px-16 lg:px-24 text-left">
         {/* Background Video */}
         <video
           src="/materials/Contact_Hero.webm"
@@ -83,17 +83,14 @@ function ContactPage({ onBack, onOpenAbout, onOpenKitchen, onOpenCarpentry }) {
           preload="auto"
         />
 
-        {/* Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
-
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <p className="uppercase tracking-[4px] text-olive mb-4 font-bold text-sm">
+        <div className="relative z-10 max-w-4xl">
+          <p className="uppercase tracking-[4px] text-olive mb-4 font-bold text-sm drop-shadow-md">
             We're Here For You
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-ivory">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-ivory drop-shadow-lg">
             Let's Build Your Dream Space
           </h1>
-          <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-zinc-300 max-w-2xl drop-shadow-md">
             Whether you have a question about our services, pricing, or want to start a new project, our team is ready to answer all your questions.
           </p>
         </div>
