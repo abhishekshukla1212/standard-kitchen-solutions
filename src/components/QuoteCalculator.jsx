@@ -1,0 +1,180 @@
+import { useMemo, useState } from "react";
+
+const serviceRates = {
+  kitchen: 1800,
+  interior: 1200,
+  cabinetry: 1500,
+};
+
+function QuoteCalculator() {
+  const [category, setCategory] = useState("kitchen");
+  const [area, setArea] = useState(120);
+  const [material, setMaterial] = useState("standard");
+  const [extras, setExtras] = useState({
+    plumbing: false,
+    lighting: false,
+    appliances: false,
+  });
+  const [email, setEmail] = useState("");
+
+  const materialFactor = useMemo(() => {
+    if (material === "premium") return 1.35;
+    if (material === "luxury") return 1.6;
+    return 1;
+  }, [material]);
+
+  const extrasCost = useMemo(() => {
+    let cost = 0;
+    if (extras.plumbing) cost += 450;
+    if (extras.lighting) cost += 300;
+    if (extras.appliances) cost += 600;
+    return cost;
+  }, [extras]);
+
+  const estimate = useMemo(() => {
+    const base = serviceRates[category] || serviceRates.kitchen;
+    const areaCost = area * 18;
+    const total = (base + areaCost) * materialFactor + extrasCost;
+    return Math.round(total / 50) * 50;
+  }, [category, area, materialFactor, extrasCost]);
+
+  return (
+    <section id="estimate" className="bg-bisque py-20 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl rounded-[40px] border border-stone bg-bisque p-6 sm:p-8 shadow-xl">
+        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-olive">
+              Instant quote calculator
+            </p>
+            <h2 className="mt-4 text-4xl font-bold text-darktext sm:text-5xl">
+              Estimate your kitchen or interior remodel.
+            </h2>
+            <p className="mt-6 max-w-2xl text-olive">
+              Get an immediate project estimate based on space, material quality, and optional extras.
+            </p>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              <label className="grid gap-2 text-sm text-olive">
+                Project type
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="rounded-3xl border border-stone bg-bisque px-4 py-3 text-base outline-none focus:border-darktext"
+                >
+                  <option value="kitchen">Kitchen Remodel</option>
+                  <option value="interior">Interior Refresh</option>
+                  <option value="cabinetry">Custom Cabinetry</option>
+                </select>
+              </label>
+
+              <label className="grid gap-2 text-sm text-olive">
+                Space area (sq ft)
+                <input
+                  type="number"
+                  min="30"
+                  max="500"
+                  value={area}
+                  onChange={(e) => setArea(Number(e.target.value))}
+                  className="rounded-3xl border border-stone bg-bisque px-4 py-3 text-base outline-none focus:border-darktext"
+                />
+              </label>
+
+              <label className="grid gap-2 text-sm text-olive">
+                Material quality
+                <select
+                  value={material}
+                  onChange={(e) => setMaterial(e.target.value)}
+                  className="rounded-3xl border border-stone bg-bisque px-4 py-3 text-base outline-none focus:border-darktext"
+                >
+                  <option value="standard">Standard</option>
+                  <option value="premium">Premium</option>
+                  <option value="luxury">Luxury</option>
+                </select>
+              </label>
+
+              <div className="grid gap-3 text-sm text-olive">
+                <span>Optional extras</span>
+                <label className="flex flex-col gap-3 rounded-3xl border border-stone bg-bisque p-4 sm:flex-row sm:items-center">
+                  <input
+                    type="checkbox"
+                    checked={extras.plumbing}
+                    onChange={(e) => setExtras((prev) => ({ ...prev, plumbing: e.target.checked }))}
+                    className="h-4 w-4 rounded border-stone text-darktext focus:ring-olive"
+                  />
+                  <span>Plumbing work</span>
+                </label>
+                <label className="flex flex-col gap-3 rounded-3xl border border-stone bg-bisque p-4 sm:flex-row sm:items-center">
+                  <input
+                    type="checkbox"
+                    checked={extras.lighting}
+                    onChange={(e) => setExtras((prev) => ({ ...prev, lighting: e.target.checked }))}
+                    className="h-4 w-4 rounded border-stone text-darktext focus:ring-olive"
+                  />
+                  <span>Lighting upgrades</span>
+                </label>
+                <label className="flex flex-col gap-3 rounded-3xl border border-stone bg-bisque p-4 sm:flex-row sm:items-center">
+                  <input
+                    type="checkbox"
+                    checked={extras.appliances}
+                    onChange={(e) => setExtras((prev) => ({ ...prev, appliances: e.target.checked }))}
+                    className="h-4 w-4 rounded border-stone text-darktext focus:ring-olive"
+                  />
+                  <span>Appliance package</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-[32px] border border-darktext/10 bg-bisque p-6 sm:p-8 shadow-xl">
+            <div className="text-sm uppercase tracking-[0.35em] text-olive">
+              Estimated project cost
+            </div>
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <span className="text-4xl font-bold text-darktext sm:text-5xl">${estimate.toLocaleString()}</span>
+              <span className="text-olive">approx.</span>
+            </div>
+            <p className="mt-3 text-sm text-olive">
+              This is an instant estimate to help plan your budget. Final pricing will depend on a full site survey.
+            </p>
+
+            <div className="mt-8 space-y-3 rounded-3xl bg-bisque p-6">
+              <div className="flex items-center justify-between text-sm text-olive">
+                <span>Base service</span>
+                <span>${serviceRates[category].toLocaleString()}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm text-olive">
+                <span>Area charge</span>
+                <span>${(area * 18).toLocaleString()}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm text-olive">
+                <span>Material multiplier</span>
+                <span>x{materialFactor}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm text-olive">
+                <span>Extras</span>
+                <span>${extrasCost.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <label className="mt-8 grid gap-2 text-sm text-olive">
+              Email (optional)
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="rounded-3xl border border-stone bg-bisque px-4 py-3 text-base outline-none focus:border-darktext"
+              />
+            </label>
+
+            <button className="mt-6 w-full rounded-3xl bg-darktext px-6 py-4 text-ivory transition hover:bg-darktext">
+              Save estimate
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default QuoteCalculator;

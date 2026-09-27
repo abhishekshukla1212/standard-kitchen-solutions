@@ -1,0 +1,178 @@
+import { useState } from "react";
+import { FaTimes } from "react-icons/fa";
+
+function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const projects = [
+    {
+      id: 1,
+      image:
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200",
+      title: "Luxury Modular Kitchen",
+      area: "120 sq ft",
+      material: "Acrylic Finish",
+      duration: "14 Days",
+      description:
+        "Modern modular kitchen with premium acrylic finish and soft-close cabinets.",
+    },
+    {
+      id: 2,
+      image:
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200",
+      title: "Modern Interior Design",
+      area: "250 sq ft",
+      material: "Laminate Finish",
+      duration: "21 Days",
+      description:
+        "Elegant  interior solution with customized storage and lighting.",
+    },
+    {
+      id: 3,
+      image:
+        "https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200",
+      title: "Premium Smart Kitchen",
+      area: "180 sq ft",
+      material: "PU Finish",
+      duration: "18 Days",
+      description:
+        "Luxury kitchen with smart storage systems and modern aesthetics.",
+    },
+  ];
+
+  // Duplicating the list ensures seamless looping from 0% to -50%
+  const marqueeItems = [...projects, ...projects];
+
+  return (
+    <section id="projects" className="bg-stone text-ivory py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+      {/* Dynamic Keyframes for smooth infinite loop */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
+        }
+        .paused {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+
+      <div className="max-w-7xl mx-auto">
+        {/* Heading */}
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-3xl sm:text-5xl font-bold">Our Projects</h2>
+          <p className="mt-4 text-olive text-base sm:text-lg">
+            Explore our premium kitchen and interior transformations.
+          </p>
+        </div>
+
+        {/* Continuous Marquee Track */}
+        <div
+          className="relative w-full overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
+          <div
+            className={`flex gap-8 w-max ${
+              isPaused ? "paused" : ""
+            } animate-marquee`}
+          >
+            {marqueeItems.map((project, index) => (
+              <div
+                key={`${project.id}-${index}`}
+                onClick={() => setSelectedProject(project)}
+                className="group relative overflow-hidden rounded-3xl cursor-pointer flex-shrink-0 w-[calc(100vw-2rem)] sm:w-96"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  className="w-full h-80 object-cover group-hover:scale-110 transition duration-500"
+                />
+
+                <div className="absolute inset-0 bg-stone/40"></div>
+
+                <div className="absolute bottom-6 left-6">
+                  <h3 className="text-2xl font-semibold">{project.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Modal */}
+        {selectedProject && (
+          <div className="fixed inset-0 bg-stone/80 flex items-center justify-center z-50 p-6">
+            <div className="relative bg-ivory rounded-3xl max-w-3xl w-full max-h-[calc(100dvh-2rem)] overflow-y-auto shadow-2xl">
+              {/* Close Icon */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 bg-ivory p-3 rounded-full shadow-lg z-10 hover:scale-110 transition"
+              >
+                <FaTimes />
+              </button>
+
+              {/* Image */}
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                loading="lazy"
+                className="w-full h-48 sm:h-80 object-cover"
+              />
+
+              {/* Content */}
+              <div className="p-5 sm:p-8">
+                <h2 className="text-2xl sm:text-4xl font-bold text-darktext mb-4">
+                  {selectedProject.title}
+                </h2>
+
+                <p className="text-olive leading-relaxed">
+                  {selectedProject.description}
+                </p>
+
+                {/* Details */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                  <div className="bg-ivory p-4 rounded-xl">
+                    <h4 className="font-semibold text-darktext">Area</h4>
+                    <p className="text-olive">{selectedProject.area}</p>
+                  </div>
+
+                  <div className="bg-ivory p-4 rounded-xl">
+                    <h4 className="font-semibold text-darktext">Material</h4>
+                    <p className="text-olive">{selectedProject.material}</p>
+                  </div>
+
+                  <div className="bg-ivory p-4 rounded-xl">
+                    <h4 className="font-semibold text-darktext">Duration</h4>
+                    <p className="text-olive">{selectedProject.duration}</p>
+                  </div>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                  <button className="bg-stone text-ivory px-6 py-3 rounded-lg hover:bg-stone transition w-full sm:w-auto">
+                    Request Quote
+                  </button>
+
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="border border-darktext text-darktext px-6 py-3 rounded-lg hover:bg-ivory transition w-full sm:w-auto"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export default Projects;

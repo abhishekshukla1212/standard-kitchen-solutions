@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FAF7F2;
+  --color-bisque: #E5BCA9;
+  --color-champagne: #E5D5BC;
+  --color-stone: #C8C0B5;
+  --color-olive: #7A8864;
+  --color-dustyblue: #A9BDD1;
+  --color-darktext: #2A2F25;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+}
+
+.carousel-wrapper:hover .carousel-container {
+  animation-play-state: paused;
+}
+
+.carousel-container {
+  animation: carousel 30s linear infinite;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.service-card {
+  animation: slideInFromLeft 0.6s ease-out forwards;
+}
