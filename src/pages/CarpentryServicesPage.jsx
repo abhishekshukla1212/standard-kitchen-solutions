@@ -56,7 +56,7 @@ function CarpentryServicesPage({ onBack, onOpenAbout, onOpenContact, onOpenKitch
       />
 
       {/* Hero Section */}
-      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center text-center px-6">
+      <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center px-6 md:px-16 lg:px-24 text-left">
         <video
           src="/materials/Carpentry service.webm"
           className="absolute inset-0 w-full h-full object-cover"
@@ -68,14 +68,14 @@ function CarpentryServicesPage({ onBack, onOpenAbout, onOpenContact, onOpenKitch
         />
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
 
-        <div className="relative z-10 max-w-3xl mx-auto pt-20">
-          <p className="uppercase tracking-[4px] text-olive mb-4 font-bold text-sm text-[#F3E5AB]">
+        <div className="relative z-10 max-w-3xl pt-20">
+          <p className="uppercase tracking-[4px] text-[#F3E5AB] mb-4 font-bold text-sm">
             Bespoke Woodwork
           </p>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg leading-tight">
             Carpentry & Interiors
           </h1>
-          <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-8 font-medium">
+          <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mb-8 font-medium">
             Premium bespoke carpentry, from modular kitchens to custom wardrobes, crafted to perfection. We turn your vision into beautiful, functional spaces.
           </p>
           <button 
