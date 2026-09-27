@@ -84,13 +84,22 @@ function ContactPage({ onBack, onOpenAbout, onOpenKitchen, onOpenCarpentry }) {
         />
 
         <div className="relative z-10 max-w-4xl">
-          <p className="uppercase tracking-[4px] text-olive mb-4 font-bold text-sm drop-shadow-md">
+          <p 
+            className="uppercase tracking-[4px] text-olive mb-4 font-bold text-sm" 
+            style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.9)" }}
+          >
             We're Here For You
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-ivory drop-shadow-lg">
+          <h1 
+            className="text-4xl md:text-6xl font-bold mb-6 text-ivory" 
+            style={{ textShadow: "0px 4px 20px rgba(0,0,0,0.9), 0px 2px 6px rgba(0,0,0,0.8)" }}
+          >
             Let's Build Your Dream Space
           </h1>
-          <p className="text-lg md:text-xl text-zinc-300 max-w-2xl drop-shadow-md">
+          <p 
+            className="text-lg md:text-xl text-zinc-200 max-w-2xl" 
+            style={{ textShadow: "0px 2px 10px rgba(0,0,0,0.9)" }}
+          >
             Whether you have a question about our services, pricing, or want to start a new project, our team is ready to answer all your questions.
           </p>
         </div>
