@@ -15,9 +15,16 @@ function ContactPage({ onBack, onOpenAbout, onOpenKitchen, onOpenCarpentry }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Scroll to top on mount
+  // Scroll to form on mount
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const formElement = document.getElementById("contact-form-section");
+    if (formElement) {
+      setTimeout(() => {
+        formElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const handleInputChange = (e) => {
@@ -106,7 +113,7 @@ function ContactPage({ onBack, onOpenAbout, onOpenKitchen, onOpenCarpentry }) {
       </section>
 
       {/* Main Content: Split Layout */}
-      <section className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8">
+      <section id="contact-form-section" className="max-w-7xl mx-auto px-6 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8">
         
         {/* Left Side: Contact Info */}
         <div className="lg:col-span-2 space-y-12 pr-0 lg:pr-8">
