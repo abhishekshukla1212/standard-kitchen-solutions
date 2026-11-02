@@ -80,7 +80,7 @@ function Invoice({ onBack }) {
       dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString("en-IN"),
       customerName: invoiceForm.customerName || "Customer Name",
       customerAddress: invoiceForm.customerAddress || "Customer Address",
-      customerMobile: invoiceForm.customerMobile || "Mobile Number",
+      customerMobile: invoiceForm.customerMobile,
       items: invoiceForm.items,
       tax: invoiceForm.tax,
       discount: invoiceForm.discount,
@@ -146,6 +146,11 @@ function Invoice({ onBack }) {
 
     if (!invoiceForm.customerName.trim()) {
       setAuth((prev) => ({ ...prev, error: "Please enter the customer name before generating the invoice." }));
+      return;
+    }
+
+    if (!invoiceForm.customerMobile.trim()) {
+      setAuth((prev) => ({ ...prev, error: "Please enter the customer mobile number before generating the invoice." }));
       return;
     }
 
@@ -324,6 +329,8 @@ function Invoice({ onBack }) {
         .totals-box { min-width: 270px; background: var(--walnut); color: #fffaf2; border-radius: 3px; padding: 17px 20px; }
         .totals-row { display: flex; justify-content: space-between; gap: 30px; margin: 9px 0; font-size: 13px; }
         .totals-row:last-child { border-top: 1px solid rgba(255, 250, 242, 0.3); padding-top: 13px; margin-top: 14px; font-size: 16px; }
+        .invoice-total-row { align-items: center; padding: 12px; border: 2px solid var(--walnut); border-radius: 3px; background: #f3d779; color: var(--walnut-deep); font-size: 18px; }
+        .invoice-total-amount { font-size: 22px; }
         .notes-box { border-top: 1px solid #e4d9cc; padding-top: 16px; }
         .invoice-list { display: flex; flex-direction: column; gap: 10px; }
         .invoice-list h3 { margin: 0 0 3px; color: var(--walnut); font: 700 18px Georgia, serif; }
@@ -345,10 +352,12 @@ function Invoice({ onBack }) {
         @media print {
           body { background: white; }
           .invoice-page { padding: 0; background: white; }
-          .invoice-page::before, .invoice-header-row, .invoice-form, .secondary-btn, .ghost-btn, .invoice-list { display: none; }
+          .invoice-page::before, .invoice-header-row, .invoice-form, .secondary-btn, .ghost-btn, .invoice-list, .invoice-card .item-controls { display: none; }
           .invoice-preview { display: block; padding: 0; border: none; box-shadow: none; }
           .invoice-preview > h2 { display: none; }
           .invoice-card { border: none; box-shadow: none; padding: 0; }
+          .invoice-total-row { border: 2px solid #251914; background: #f3d779 !important; color: #251914 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+          .invoice-total-amount { font-size: 22px; font-weight: 800; }
         }
       `}</style>
 
@@ -408,8 +417,13 @@ function Invoice({ onBack }) {
                   <input value={invoiceForm.customerName} onChange={updateField("customerName")} />
                 </div>
                 <div className="form-group">
-                  <label>Mobile Number</label>
-                  <input value={invoiceForm.customerMobile} onChange={updateField("customerMobile")} />
+                  <label>Mobile Number *</label>
+                  <input
+                    type="tel"
+                    required
+                    value={invoiceForm.customerMobile}
+                    onChange={updateField("customerMobile")}
+                  />
                 </div>
                 <div className="form-group">
                   <label>Address</label>
@@ -507,6 +521,7 @@ function Invoice({ onBack }) {
                 <div className="meta-card">
                   <h3>Bill To</h3>
                   <p>{activeInvoice.customerName}</p>
+                  <p className="customer-mobile"><strong>Customer Mobile:</strong> {activeInvoice.customerMobile || "Not provided"}</p>
                   <p>{activeInvoice.customerAddress}</p>
                 </div>
               </div>
@@ -548,9 +563,9 @@ function Invoice({ onBack }) {
                       <span>{currency.format(activeInvoice.discountAmount || 0)}</span>
                     </div>
                   )}
-                  <div className="totals-row">
+                  <div className="totals-row invoice-total-row">
                     <strong>Total</strong>
-                    <strong>{currency.format(activeInvoice.total || 0)}</strong>
+                    <strong className="invoice-total-amount">{currency.format(activeInvoice.total || 0)}</strong>
                   </div>
                 </div>
               </div>
